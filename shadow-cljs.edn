@@ -1,0 +1,12 @@
+{:lein   {:profile "cljs"}
+ :nrepl  {:port 9000}
+ :builds {:cards {:target           :browser
+                  :output-dir       "resources/public/js/cards"
+                  :asset-path       "/js/cards"
+                  :compiler-options {:devcards true}
+                  :modules          {:main
+                                     {:entries [file-upload.cards]}}
+                  :devtools         {:after-load file-upload.cards/refresh
+                                     :preloads   [fulcro.inspect.preload file-upload.development-preload]
+                                     :http-root  "resources/public"
+                                     :http-port  8023}}}}
