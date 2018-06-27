@@ -70,7 +70,7 @@
 
 (def ui-progress-control (prim/factory ProgressControl))
 
-(defcard-fulcro file-sample (make-root ProgressControl {}))
+#_(defcard-fulcro file-sample (make-root ProgressControl {}))
 
 (defmutation update-progress [params]
   (action [{:keys [state]}]
@@ -115,7 +115,7 @@
    :initial-state {:id "upload" :files []}
    :ident         (fn [] [:COMPONENT :FILE-UPLOAD])}
   (dom/div nil
-    (dom/label {:htmlFor id}
+    (dom/label :.ui.button {:htmlFor id}
       "Add Files"
       (dom/input {:id       id
                   :onChange (fn [evt]
@@ -129,9 +129,9 @@
                   :name     id
                   :type     "file"
                   :value    ""
-                  :style    {:display "none"}})
-      (dom/ul
-        (map ui-file files)))))
+                  :style    {:display "none"}}))
+    (dom/ul
+      (map ui-file files))))
 
 (def file-response-middleware
   (->
