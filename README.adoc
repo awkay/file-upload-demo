@@ -1,0 +1,26 @@
+= File Upload Demo
+
+This contains a short demo that leverages Fulcro 2.0 middleware on the client to add file upload
+support. This demo is a work in progress. Features:
+
+- Creating a hand-rolled server using `mount` (instead of `component`)
+- Adding http remote to client for file upload
+- Adding middleware to server to receive file upload
+
+The code is in a devcard. To run this project:
+
+```
+$ npm install
+$ npx shadow-cljs watch cards
+```
+
+then in another command line:
+
+```
+$ lein repl
+user=> (go)
+```
+
+then navigate to http://localhost:3000/cards.html.
+
+The REPL supports `(restart)` to reload the server code and restart it. The client does hot code reload.
