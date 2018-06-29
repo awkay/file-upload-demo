@@ -5,7 +5,7 @@
 
   :dependencies [[org.clojure/clojure "1.9.0"]
                  [thheller/shadow-cljs "2.4.5"]
-                 [fulcrologic/fulcro "2.5.11-SNAPSHOT"]
+                 [fulcrologic/fulcro "2.5.11"]
                  [promenade "0.5.2"]
                  [com.taoensso/timbre "4.10.0"]
                  [mount "0.1.12"]
