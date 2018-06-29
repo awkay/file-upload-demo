@@ -1,11 +1,21 @@
 = File Upload Demo
 
 This contains a short demo that leverages Fulcro 2.0 middleware on the client to add file upload
-support. This demo is a work in progress. Features:
+support.
 
-- Creating a hand-rolled server using `mount` (instead of `component`)
+Features:
+
+- Creating a hand-rolled server using `mount` (instead of `component`) and immutant web server.
 - Adding http remote to client for file upload
 - Adding middleware to server to receive file upload
+- Using a temporary store with tempid remapping to track what files are available for future mutations from the client.
+
+See `src/cards/file_upload/file_upload_cards.cljs` for the Demo code
+
+See `src/main/file_upload/file_upload.cljc` for the upload client/server middleware
+and client/server mutation code.
+
+See `src/main/file_upload/server.clj` for the server code and middleware chain.
 
 The code is in a devcard. To run this project:
 
@@ -21,6 +31,7 @@ $ lein repl
 user=> (go)
 ```
 
-then navigate to http://localhost:3000/cards.html.
+then navigate to http://localhost:3000/cards.html.  Add some files.  Use the developer tools
+network speed to watch the progress bars.
 
 The REPL supports `(restart)` to reload the server code and restart it. The client does hot code reload.

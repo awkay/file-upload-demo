@@ -1,20 +1,16 @@
 (ns file-upload.server
   (:require
-    [promenade.core :as prom]
-    [clojure.java.io :as io]
+    [file-upload.file-upload :as fu]
     [fulcro.server :as server]
-    [fulcro.client.util :refer [transit-str->clj]]
     [immutant.web :as web]
-    [mount.core :as mount :refer [defstate ]]
+    [mount.core :refer [defstate]]
     [ring.middleware.content-type :refer [wrap-content-type]]
     [ring.middleware.gzip :refer [wrap-gzip]]
     [ring.middleware.params :refer [wrap-params]]
     [ring.middleware.multipart-params :refer [wrap-multipart-params]]
     [ring.middleware.not-modified :refer [wrap-not-modified]]
     [ring.middleware.resource :refer [wrap-resource]]
-    [ring.util.response :as resp :refer [response file-response resource-response]]
-    [taoensso.timbre :as timbre])
-  (:import (java.util UUID)))
+    [ring.util.response :refer [response file-response resource-response]]))
 
 (defstate config
   :start (server/load-config {:config-path "config/dev.edn"}))
@@ -36,27 +32,10 @@
         (:transit-params request))
       (handler request))))
 
-(defn wrap-file-uploads [handler path]
-  (fn [{:keys [uri] :as req}]
-    (if (= uri path)
-      (let [id      (transit-str->clj (get-in req [:params "id"] 1))
-            file    (get-in req [:params "file" :tempfile])
-            name    (get-in req [:params "name"] "unknown")
-            real-id (UUID/randomUUID)]
-        (prom/if-mlet [result (prom/!
-                                (do
-                                  (timbre/info "File upload " real-id name file)
-                                  ;(tmp/store temporary-file-store real-id name file)
-                                  (-> (resp/response {'upload {:tempids {id real-id}}})
-                                    (resp/content-type "application/transit+json"))))]
-          result
-          (-> (resp/response {}) (resp/status 400))))
-      (handler req))))
-
 (defstate middleware
   :start
   (-> not-found-handler
-    (wrap-file-uploads "/file-uploads")
+    (fu/wrap-file-uploads "/file-uploads")
     wrap-params
     wrap-multipart-params
     (wrap-api "/api")

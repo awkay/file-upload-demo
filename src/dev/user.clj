@@ -24,7 +24,7 @@
 
 ;; ==================== SERVER ====================
 
-(set-refresh-dirs "src/dev" "src/main" )
+(set-refresh-dirs "src/dev" "src/main")
 
 
 (defn go []
@@ -32,4 +32,4 @@
 
 (defn restart []
   (mount/stop)
-  (tools-ns/refresh :after 'user/go ))
+  (tools-ns/refresh :after 'user/go))

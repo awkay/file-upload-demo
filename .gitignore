@@ -19,3 +19,4 @@ package-lock.json
 resources/private
 .lein-repl-history
 .shadow-cljs/
+.nrepl-port

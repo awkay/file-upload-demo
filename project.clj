@@ -15,12 +15,12 @@
 
   :uberjar-name "file_upload.jar"
 
-  :source-paths ["src/main"]
+  :source-paths ["src/main" "src/cards"]
 
   :profiles {:cljs {:source-paths ["src/main" "src/cards"]
                     :dependencies [[binaryage/devtools "0.9.10"]
                                    [org.clojure/core.async "0.4.474"]
-                                   [fulcrologic/fulcro-inspect "2.2.0-beta6"]
+                                   [fulcrologic/fulcro-inspect "2.2.0-beta8-SNAPSHOT"]
                                    [devcards "0.2.4" :exclusions [cljsjs/react cljsjs/react-dom]]]}
              :dev  {:source-paths ["src/dev" "src/main" "src/cards"]
 
